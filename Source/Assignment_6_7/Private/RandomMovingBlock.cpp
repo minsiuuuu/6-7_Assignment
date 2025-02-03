@@ -20,6 +20,7 @@ void ARandomMovingBlock::BeginPlay()
 	
 	StartLocation = GetActorLocation();
     SetDirection();
+    SetRandomMovementValues();
 }
 
 void ARandomMovingBlock::Tick(float DeltaTime)

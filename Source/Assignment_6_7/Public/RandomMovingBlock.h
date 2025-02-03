@@ -42,7 +42,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Movement Settings")
 	EMoveAxis MoveAxis = EMoveAxis::Y;
-	
+
 	void SetRandomMovementValues();		// 랜덤 이동 값 초기화
 	void SetDirection();
 };
