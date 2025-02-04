@@ -40,7 +40,7 @@ AFlyingPawn::AFlyingPawn()
 void AFlyingPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 void AFlyingPawn::Tick(float DeltaTime)
@@ -105,16 +105,18 @@ void AFlyingPawn::Move(const FInputActionValue& value)
 void AFlyingPawn::Look(const FInputActionValue& value)
 {
 	FVector2D LookInput = value.Get<FVector2D>();
+	float DeltaTime = GetWorld()->GetDeltaSeconds();
+
 	if (!LookInput.IsNearlyZero())
 	{
 		FRotator ActorRotation = GetActorRotation();
-		ActorRotation.Yaw += LookInput.X;
-		ActorRotation.Pitch = FMath::Clamp(ActorRotation.Pitch - LookInput.Y, -89.9f, 89.9f);
+		ActorRotation.Yaw += LookInput.X * Sensitivity * DeltaTime;
+		ActorRotation.Pitch = FMath::Clamp(ActorRotation.Pitch - LookInput.Y * Sensitivity * DeltaTime, -89.9f, 89.9f);
 		SetActorRotation(ActorRotation);
 
 		FRotator ControlRotation = GetControlRotation();
-		ControlRotation.Yaw += LookInput.X;
-		ControlRotation.Pitch = FMath::Clamp(ControlRotation.Pitch - LookInput.Y, -89.9f, 89.9f);
+		ControlRotation.Yaw += LookInput.X * Sensitivity * DeltaTime;
+		ControlRotation.Pitch = FMath::Clamp(ControlRotation.Pitch - LookInput.Y * Sensitivity * DeltaTime, -89.9f, 89.9f);
 		Controller->SetControlRotation(ControlRotation);
 	}
 }
